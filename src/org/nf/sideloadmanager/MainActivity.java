@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 	TextView t1, t2, t3;
 	ListView lv;
 	private ArrayAdapter<String> listAdapter;
-	private String root="/storage/";
+	private String root="/sdcard/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class MainActivity extends Activity {
         	return;
         }
         listAdapter.clear();
-        if (dirPath != "/" && dirPath != "//")
+        if (!dirPath.equals("/") && !dirPath.equals("//"))
         	listAdapter.add("../");
 		for (int i=0; i < files.length; i++) {
     		File file = files[i];
