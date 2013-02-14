@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.content.Intent;
+import android.content.ComponentName;
 
 public class MainActivity extends Activity {
 	Button b1, b2;
@@ -37,8 +39,12 @@ public class MainActivity extends Activity {
         	public void onClick(View v) {
                 Log.v("Tag", "button2 clicked");
         		Toast msg = Toast.makeText(getBaseContext(),
-        				"You have clicked Button 2", Toast.LENGTH_SHORT);
+        				"Starting Application Manager", Toast.LENGTH_SHORT);
         		msg.show();
+        		Intent intent = new Intent(Intent.ACTION_MAIN);
+        	    intent.setComponent(ComponentName.unflattenFromString("com.android.settings/.ManageApplications"));
+        	    intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        	    startActivity(intent);
         	}
         });
 
@@ -103,11 +109,12 @@ public class MainActivity extends Activity {
     	}
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-
+*/
 }
