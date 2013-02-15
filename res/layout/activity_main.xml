@@ -9,9 +9,10 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="100dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Manage" />
+        android:layout_margin="10dp"
+        android:text="@string/app_manage" />
 
     <ListView
         android:id="@+id/listView1"

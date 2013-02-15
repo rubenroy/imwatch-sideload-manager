@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.File;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -39,7 +40,7 @@ public class MainActivity extends Activity {
         	public void onClick(View v) {
                 Log.v("Tag", "button2 clicked");
         		Toast msg = Toast.makeText(getBaseContext(),
-        				"Starting Application Manager", Toast.LENGTH_SHORT);
+        				getString(R.string.start_app_manager), Toast.LENGTH_SHORT);
         		msg.show();
         		Intent intent = new Intent(Intent.ACTION_MAIN);
         	    intent.setComponent(ComponentName.unflattenFromString("com.android.settings/.ManageApplications"));
@@ -65,7 +66,7 @@ public class MainActivity extends Activity {
         		msg.show();
                 Log.v("selected", "root='" + root + "' filename='" + filename + "'");
             	File f = new File(root + filename);
-                if (filename == "../") {
+                if (filename.equals("../")) {
                 	File fp = new File(root);
                 	if (fp.getParent() != null)
                 		root = fp.getParent() + "/";
@@ -78,7 +79,15 @@ public class MainActivity extends Activity {
                 		Log.v("newdir", root + " is a directory");
                 		getDir(root);
                 } else {
+                		Uri uri = Uri.fromFile(f);
                 		Log.v("Tag", "file " + f.getAbsolutePath() + " is a file");
+                		// Intent intent = new Intent(Intent.ACTION_VIEW);
+                		Intent intent = new Intent();
+                	    //intent.setData(Uri.parse("file:/" + f.getAbsolutePath()));
+                		intent.setAction(android.content.Intent.ACTION_VIEW);
+                	    intent.setData(uri);
+                	    // intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                	    startActivity(intent);
                 }
         	}
         });
