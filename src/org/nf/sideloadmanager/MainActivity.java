@@ -85,7 +85,8 @@ public class MainActivity extends Activity {
                 		Intent intent = new Intent();
                 	    //intent.setData(Uri.parse("file:/" + f.getAbsolutePath()));
                 		intent.setAction(android.content.Intent.ACTION_VIEW);
-                	    intent.setData(uri);
+                	    //intent.setData(uri);
+                	    intent.setDataAndType(uri, "application/vnd.android.package-archive");
                 	    // intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 	    startActivity(intent);
                 }
