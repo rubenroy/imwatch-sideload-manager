@@ -1,17 +1,15 @@
 package org.nf.sideloadmanager;
 
-import java.util.ArrayList;  
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.io.File;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -21,11 +19,10 @@ import android.content.Intent;
 import android.content.ComponentName;
 
 public class MainActivity extends Activity {
-	Button b1, b2;
-	TextView t1, t2, t3;
+	Button b2;
 	ListView lv;
 	private ArrayAdapter<String> listAdapter;
-	private String root="/sdcard/";
+	private String root = Environment.getExternalStorageDirectory().getPath() + "/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +78,16 @@ public class MainActivity extends Activity {
                 } else {
                 		Uri uri = Uri.fromFile(f);
                 		Log.v("Tag", "file " + f.getAbsolutePath() + " is a file");
-                		// Intent intent = new Intent(Intent.ACTION_VIEW);
-                		Intent intent = new Intent();
-                	    //intent.setData(Uri.parse("file:/" + f.getAbsolutePath()));
-                		intent.setAction(android.content.Intent.ACTION_VIEW);
-                	    //intent.setData(uri);
-                	    intent.setDataAndType(uri, "application/vnd.android.package-archive");
-                	    // intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                	    startActivity(intent);
+                		if (filename.endsWith(".apk")) {
+                			Intent intent = new Intent();
+                			intent.setAction(android.content.Intent.ACTION_VIEW);
+                			intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                			startActivity(intent);
+                		} else {
+                			msg = Toast.makeText(getBaseContext(),
+                				getString(R.string.not_an_apk), Toast.LENGTH_SHORT);
+                			msg.show();
+                		}
                 }
         	}
         });
