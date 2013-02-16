@@ -1,3 +1,8 @@
+/*
+ * (c) 2013 by Nils Faerber, Germany
+ * Licensed under the terms of the Gnu Public License (GPL) V3
+ * see file COPYING for details
+ */
 package org.nf.sideloadmanager;
 
 import java.util.ArrayList;
